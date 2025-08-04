@@ -16,6 +16,7 @@ namespace Debug {
     void Stop();
     int GetStringCount();
     string GetNextString();
+    bool IsListening { get; }
   }
 
   [ComVisible(true)]
@@ -27,8 +28,13 @@ namespace Debug {
     private const int DBWIN_BUFFER_SIZE = 4096;
     private const uint WAIT_OBJECT_0 = 0;
 
-    private volatile bool isListening;
     private Thread? listeningThread;
+
+    private volatile bool isListening;
+
+    public bool IsListening {
+      get => isListening;
+    }
 
     public void Start() {
       if (isListening) return; isListening = true;
